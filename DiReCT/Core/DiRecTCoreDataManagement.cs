@@ -144,7 +144,7 @@ namespace DiReCT
             // Check if index is valid
             if (index >= RecordBuffer.Length || index < 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("The index should be in the range of the size of the buffer.");
             }
 
             record = null;

@@ -35,5 +35,30 @@ namespace DiReCT.Model.Utilities.Tests
             bool expected = true;
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod()]
+        public void DequeueTest()
+        {
+            dynamic record = DllFileLoader.CreateAnInstance();
+            record.waterLevel = 12;
+            record.PossibleCauseOfDisaster = new ObservableCollection<string>() { "123" };
+            record.currentLongitude = "121.23";
+            record.currentLatitude = "23.5";
+            record.currentTimeStamp = "2017/1/23";
+            CancellationToken cancellationToken = new CancellationToken();
+
+            WorkItem workItem
+                    = new WorkItem(FunctionGroupName.DataManagementFunction,
+                                   AsyncCallName.SaveRecord,
+                                   (Object)record,
+                                   null,
+                                   null);
+            Utilities.PriorityWorkQueue<WorkItem> target = new Utilities.PriorityWorkQueue<WorkItem>((int)WorkPriority.NumberOfPriorities);
+            int expected = (int)WorkPriority.Normal;
+            target.Enqueue(workItem, expected, cancellationToken);
+            WorkItem workItem2;
+            int actual = target.Dequeue(out workItem2);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

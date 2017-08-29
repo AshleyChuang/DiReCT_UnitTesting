@@ -43,6 +43,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Collections;
+using System.Diagnostics;
 
 namespace DiReCT.Model.Utilities
 {
@@ -439,18 +440,9 @@ namespace DiReCT.Model.Utilities
                 {
                     return false;
                 }
-                try
-                {
-                    queue[priority].Enqueue(item);
-                    bitmap[priority] = true;
-
-                    wakesWorkerEvent.Set();
-                }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                
+                queue[priority].Enqueue(item);
+                bitmap[priority] = true;
+                wakesWorkerEvent.Set();
             }
 
             return true;
