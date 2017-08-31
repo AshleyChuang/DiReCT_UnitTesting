@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace DiReCT_wpf.ScreenInterface
@@ -7,11 +11,12 @@ namespace DiReCT_wpf.ScreenInterface
     {
         public event EventHandler UserEnteredInput;
 
-        public event EventHandler ScreenTimedOut;
+      
 
         public MenuViewBase()
         {
         }
+
 
         public void RaiseUserInputReadyEvent(EventArgs e)
         {
@@ -38,5 +43,6 @@ namespace DiReCT_wpf.ScreenInterface
         {
             UIRecordSavingTriggerd?.BeginInvoke(record, null, null);
         }
+
     }
 }
